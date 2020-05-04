@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <title>新闻动态|{$news.title}</title>
+    <!-- loadstyle start -->
+    {include file="../application/index/common/layout_css.html" /} 
+    <!-- loadstyle end -->
+</head>
+<body>
+  <!-- header start -->
+  {include file="../application/index/common/header.html" /} 
+  <!-- header end -->
+
+  <!-- banner start -->
+  {include file="../application/index/common/banner.html" /} 
+  <!-- banner end -->
+  <div class="hb-back">
+    <div class="container">
+        <div class="clearfix title-header">
+          <!-- <h1 class="pull-left title-xs">{$news.title}</h1> -->
+          <!-- <div class="pull-right nav-b">当前位置：<a href="/">首页</a> > <a href="javascript:void">{$news.title}</a></div> -->
+        </div>
+      <div class="article-tt text-center">{$news.title}</div>
+      <div class="article-date text-center">发布者：管理员   发布日期：{$news.create_time}  浏览次数：{$news.click}</div>
+      <div class="text-center">
+        <div class="share-box">
+          <div class="bdsharebuttonbox">
+            <a href="#" class="bds_more" data-cmd="more"></a>
+            <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+            <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+            <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+            <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+          </div>
+          <script>
+          window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+          </script>
+        </div>
+      </div>
+      <div class="article-p">
+        {$news.content}
+      </div>
+  </div>
+</div>
+  <div class="container">
+    <h1 class="title">合作伙伴</h1>
+    <div class="hb-swiper">
+      {volist name="partners" id="partner"}
+        <div>
+          <a href="{$partner.url}" target="_blank" title="{$partner.desc}"><img src="__IMG__/{$partner.pic}"></a>
+        </div>
+      {/volist}
+    </div>
+  </div>
+  <!-- footer start -->
+  {include file="../application/index/common/footer.html" /} 
+  <!-- footer end -->
+</body>
+<!-- loadjavascript start -->
+{include file="../application/index/common/layout_js.html" /} 
+<!-- loadjavascript end -->
+
+</html>

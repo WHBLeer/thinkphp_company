@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+		<title>预约入驻</title>
+		<!-- loadstyle start -->
+		{include file="../application/index/common/layout_css.html" /} 
+		<!-- loadstyle end -->
+</head>
+<body>
+	<!-- header start -->
+	{include file="../application/index/common/header.html" /} 
+	<!-- header end -->
+
+	<!-- banner start -->
+	{include file="../application/index/common/banner.html" /} 
+	<!-- banner end -->
+
+	<div class="hb-back">
+		<div class="container">
+			<div class="form-box">
+				<div class="clearfix title-header">
+					<h1 class="pull-left title-xs">预约入驻</h1>
+					<div class="pull-right nav-b">当前位置：<a href="/">首页</a> > <a href="javascript:void">预约入驻</a></div>
+				</div>
+				<form id="configForm" method="post" action="{:url('guide/add')}">
+					<div class="form-tt">一、企业基本信息</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="form-txt">企业名称（或拟）<span>*</span></div>
+							<input type="text" class="form-control" name="companyname" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">统一社会信用代码<span>*</span></div>
+							<input type="text" class="form-control" name="creditcode" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">法人姓名<span>*</span></div>
+							<input type="text" class="form-control" name="legalperson" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">法人联系电话<span>*</span></div>
+							<input type="text" class="form-control" name="legalphone" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">实际办公地址<span>*</span></div>
+							<input type="text" class="form-control" name="officeaddress" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">注册地址<span>*</span></div>
+							<input type="text" class="form-control" name="registaddress" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">注册资金<span>*</span></div>
+							<input type="text" class="form-control" name="registmoney" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">所属领域<span>*</span></div>
+							<select class="form-control" name="belongfield" required="true" >
+								<option>--请选择--</option>
+								{foreach name="items1" item="vo"}
+									<option value="{$vo.id}">{$vo.cnname}</option>
+								{/foreach}
+							</select>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">技术领域<span>*</span></div>
+							<select class="form-control" name="techefield" required="true">
+								<option>--请选择--</option>
+								{foreach name="items2" item="vo"}
+									<option value="{$vo.id}">{$vo.cnname}</option>
+								{/foreach}
+							</select>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">企业人数<span>*</span></div>
+							<input type="text" class="form-control" name="companytotal" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">是否获得政府奖励<span>*</span></div>
+							<div class="radio-box">
+								<label class="radio-inline">
+									<input type="radio" name="zf" value="1" required="true"> 是
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="zf" value="0" required="true"> 否
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">是否为留学归国创业<span>*</span></div>
+							<div class="radio-box">
+								<label class="radio-inline">
+									<input type="radio" name="lx" value="1" required="true"> 是
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="lx" value="0" required="true"> 否
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">社会保险参保<span>*</span></div>
+							<div class="form-txt-sm">社保登记</div>
+							<div class="radio-box radio-box-sm">
+								<label class="radio-inline">
+									<input type="radio" name="sb" value="1" required="true"> 是
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="sb" value="0" required="true"> 否
+								</label>
+							</div>
+							<div class="form-txt-sm">工商登记</div>
+							<div class="radio-box radio-box-sm">
+								<label class="radio-inline">
+									<input type="radio" name="gs" value="1" required="true"> 是
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="gs" value="0" required="true"> 否
+								</label>
+							</div>
+							<div class="form-txt-sm">是否为高新技术企业</div>
+							<div class="radio-box radio-box-sm">
+								<label class="radio-inline">
+									<input type="radio" name="gx" value="1" required="true"> 是
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="gx" value="0" required="true"> 否
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">入驻中心时间<span>*</span></div>
+							<input type="text" class="form-control" name="entertime" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">财务联系人<span>*</span></div>
+							<input type="text" class="form-control" name="contact1" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">财务联系电话<span>*</span></div>
+							<input type="text" class="form-control" name="contacttel1" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">其他联系人<span>*</span></div>
+							<input type="text" class="form-control" name="contact2" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">其他联系电话<span>*</span></div>
+							<input type="text" class="form-control" name="contacttel2" required="true" />
+						</div>
+					</div>
+					<div class="jj-box">
+						<div class="jj-tt">二、公司或业务，产品简介</div>
+						<textarea class="form-control form-control-lg" rows="10" name="introduction" required="true"></textarea>
+					</div>
+					<div class="form-tt">三、融资情况</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="form-txt">是否获得投融资<span>*</span></div>
+							<div class="radio-box radio-box-sm">
+								<label class="radio-inline">
+									<input type="radio" name="rz" value="1" required="true"> 是
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="rz" value="0" required="true"> 否
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">融资轮次<span>*</span></div>
+							<input type="text" class="form-control" name="times" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">融资金额（万元）<span>*</span></div>
+							<input type="text" class="form-control" name="financingmoney" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">未来融资情况<span>*</span></div>
+							<input type="text" class="form-control" name="financingplan" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">是否被并购<span>*</span></div>
+							<div class="radio-box">
+								<label class="radio-inline">
+									<input type="radio" name="bg" value="1" required="true"> 是
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="bg" value="0" required="true"> 否
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">是否上市<span>*</span></div>
+							<div class="radio-box">
+								<label class="radio-inline">
+									<input type="radio" name="sh" value="1" required="true"> 是
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="sh" value="0" required="true"> 否
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="jj-box">
+						<div class="jj-tt">四、知识产权情况</div>
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-txt">知识产权总数<span>*</span></div>
+								<input type="text" class="form-control" name="property" required="true" />
+							</div>
+							<div class="col-xs-6">
+								<div class="form-txt">软件著作权数量<span>*</span></div>
+								<input type="text" class="form-control" name="software" required="true" />
+							</div>
+							<div class="col-xs-6">
+								<div class="form-txt">发明专利数量<span>*</span></div>
+								<input type="text" class="form-control" name="patent" required="true" />
+							</div>
+							<div class="col-xs-6">
+								<div class="form-txt">注册商标数量<span>*</span></div>
+								<input type="text" class="form-control" name="trademark" required="true" />
+							</div>
+						</div>
+					</div>
+					<div class="form-tt">五、工商税务情况</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="form-txt">企业规模类型<span>*</span></div>
+							<input type="text" class="form-control" name="scale" required="true" />
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">是否完成年报工作<span>*</span></div>
+							<div class="radio-box">
+								<label class="radio-inline">
+									<input type="radio" name="nb" value="1" required="true"> 是
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="nb" value="0" required="true"> 否
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="form-txt">企业状态是否异常<span>*</span></div>
+							<div class="radio-box radio-box-sm">
+								<label class="radio-inline">
+									<input type="radio" name="abnormal" value="1" required="true"> 是
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="abnormal" value="0" required="true"> 否
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-txt">异常原因<span>*</span></div>
+							<input type="text" class="form-control" name="abnormal" required="true" />
+						</div>
+					</div>
+					<div class="jj-box">
+						<div class="jj-tt">六、财务情况</div>
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-txt">年收入（万元）<span>*</span></div>
+								<input type="text" class="form-control" name="total1" required="true">
+							</div>
+							<div class="col-xs-6">
+								<div class="form-txt">年利润（万元）<span>*</span></div>
+								<input type="text" class="form-control" name="total2" required="true">
+							</div>
+							<div class="col-xs-6">
+								<div class="form-txt">年纳税（万元）<span>*</span></div>
+								<input type="text" class="form-control" name="total3" required="true">
+							</div>
+							<div class="col-xs-6">
+								<div class="form-txt">年研发投入（万元）<span>*</span></div>
+								<input type="text" class="form-control" name="total4" required="true">
+							</div>
+						</div>
+					</div>
+					<div class="form-tt">七、希望从孵化器获得哪方面服务和支持</div>
+					<textarea class="form-control form-control-lg" rows="10" name="indorsation" placeholder="例如：" required="true"></textarea>
+					<div class="form-b">注意事项</div>
+					<div class="form-b-tt">一、企业需提供一下资料的电子版文件，并请均加盖公章扫描或拍照发送：</div>
+					<div class="form-p">
+						<p>1、营业执照副本复印件；</p>
+						<p>2、法人及股东身份证复印件；</p>
+						<p>3、最新章程；</p>
+						<p>4、资质证书或荣誉证书；</p>
+						<p>5、公司的详细介绍；</p>
+					</div>
+					<div class="form-b-tt">二、应政府要求：</div>
+					<div class="form-p">
+						<p>1、连续一年以上未向税务部门申报企业信息的，会被工商局列入异常经营名录，吊销营业执照；</p>
+						<p>2、请务必定期和孵化器的工作人员进行联系，更新企业相关信息。</p>
+					</div>
+					<div class="text-center"><button type="button" class="btn btn-tj" onclick="ajaxRequest();return false;" >提交</button></div>
+					<!-- <div class="text-center"><button type="submit" class="btn btn-tj">提交</button></div> -->
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<h1 class="title">合作伙伴</h1>
+		<div class="hb-swiper">
+			{volist name="partners" id="partner"}
+				<div>
+					<a href="{$partner.url}" target="_blank" title="{$partner.desc}"><img src="__IMG__/{$partner.pic}"></a>
+				</div>
+			{/volist}
+		</div>
+	</div>
+	<!-- footer start -->
+	{include file="../application/index/common/footer.html" /} 
+	<!-- footer end -->
+	<script type="text/javascript">
+		// ajax提交正常表单
+	    function ajaxRequest() {
+	    	var url = $("#configForm").attr('action');
+	        var data = $("#configForm").serialize();
+	        $.post(url,data,function(info){
+	            console.log(info)
+	            if(info.code === 1){
+	                // 提交成功
+	                location.href = info.url;
+	            }else{
+	                // 提交失败
+	                alert(info.msg);
+	            }
+	        });
+	    }
+	</script>
+</body>
+<!-- loadjavascript start -->
+{include file="../application/index/common/layout_js.html" /} 
+<!-- loadjavascript end -->
+</html>

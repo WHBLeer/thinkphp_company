@@ -1,0 +1,27 @@
+<div class="footer text-center">
+    <div class="footer-img text-center">
+    	{if condition="$site_conf['footericon'] neq '' "}
+	    	<img src="__IMG__/{$site_conf.footericon}">
+	    {else /}
+	    	<img src="__INDEX__/images/footer01.png">
+	    {/if}
+    	{if condition="$site_conf['footerewm'] neq '' "}
+	    	<img src="__IMG__/{$site_conf.footerewm}">
+	    {else /}
+	    	<img src="__INDEX__/images/ewm.png">
+	    {/if}
+    </div>
+    <div class="footer-p">
+        <p>
+        	{if condition="$site_conf['telephone'] neq '' "}联系电话：{$site_conf.telephone} &nbsp;{/if}
+        	{if condition="$site_conf['webemail'] neq '' "}邮箱：{$site_conf.webemail} &nbsp;{/if}
+        	{if condition="$site_conf['address'] neq '' "}地址：{$site_conf.address} &nbsp;{/if}
+        </p>
+        <p>
+        	COPYRIGHT (©) <?php echo date('Y');?> 
+        	{if condition="$site_conf['webtitle'] neq '' "} &nbsp;{$site_conf.webtitle}{/if} 
+        	{if condition="$site_conf['webicp'] neq '' "}. &nbsp;{$site_conf.webicp}{/if}
+        	{if condition="$site_conf['webgicp'] neq '' "}. &nbsp;{$site_conf.webgicp}{/if}
+        </p>
+    </div>
+</div>

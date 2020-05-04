@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="{$CONFIG.webdesc}">
+    <meta name="keyword" content="{$CONFIG.webkeyword}">
+
+    <title>管理配置|{$CONFIG.webtitle}</title>
+
+    {include file="../application/admin/common/global-css.html" /}
+</head>
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    {include file="../application/admin/common/menu.html" /}
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        {include file="../application/admin/common/header.html" /}
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>系统配置 </h3>
+            <ul class="breadcrumb">
+                <li> <a href="/admin">首页</a> </li>
+                <li> <a href="javascript:void(0);">系统配置</a> </li>
+                <li class="active"> 管理配置 </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <section id="unseen" class="panel">
+                                <header class="panel-heading custom-tab ">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#system" data-toggle="tab">系统配置</a>
+                                        </li>
+                                        <li class="">
+                                            <a href="#index" data-toggle="tab">首页配置</a>
+                                        </li>
+                                        <li class="">
+                                            <a href="#files" data-toggle="tab">图片文件</a>
+                                        </li>
+                                        <!-- <li class="">
+                                            <a href="#email" data-toggle="tab">邮箱配置</a>
+                                        </li> -->
+                                    </ul>
+                                </header>
+                                <div class="panel-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="system">
+                                            <form action="" method="post" id="configForm1">
+                                                <table class="table table-bordered">
+                                                    <thead class="">
+                                                        <tr>
+                                                            <th width="15%">配置名称</th>
+                                                            <th align="left" >配置值</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($system as $k => $v):?>
+                                                        <tr>
+                                                            <td><?php echo $v['cnname'];?></td>
+                                                            <td align="left">
+                                                            <?php if($v['type']==1):?>
+                                                                <input name="<?php echo $v['enname'];?>" type="text" class="form-control" value="<?php echo $v['value'];?>">
+                                                            <?php elseif($v['type']==2):?>
+                                                                <textarea name="<?php echo $v['enname'];?>" class="form-control" align="left"><?php echo $v['value'];?></textarea>
+                                                            <?php elseif($v['type']==3):
+                                                                if($v['values']){
+                                                                    $arrradio=explode(',', $v['values']);
+                                                                }
+                                                                foreach ($arrradio as $k1 => $v1):
+                                                            ?>
+                                                            <label style="margin-right:15px;">
+                                                            <input <?php if($v['value']==$v1){echo 'checked="checked"';} ?> name="<?php echo $v['enname'];?>" value="<?php echo $v1;?>" type="radio">
+                                                            <span class="text"><?php echo $v1;?></span>
+                                                            </label>
+                                                            <?php endforeach;?>
+                                                            <?php elseif($v['type']==4):?>
+                                                                <label>
+                                                                    <input <?php if($v['value']==$v['values']){echo 'checked="checked"';} ?> name="<?php echo $v['enname'];?>" class="colored-success" value="<?php echo $v['values'];?>" type="checkbox">
+                                                                    <span class="text"><?php echo $v['values'];?></span>
+                                                                </label>
+                                                            <?php elseif($v['type']==5):
+                                                                if($v['values']){
+                                                                    $arrselect=explode(',', $v['values']);
+                                                                }
+                                                            ?>
+                                                            <select name="<?php echo $v['enname'];?>">
+                                                            <?php foreach ($arrselect as $k2 => $v2):?>
+                                                                <option <?php if($v['value']==$v2){echo 'selected="selected"';} ?> value="<?php echo $v2;?>"><?php echo $v2;?></option>
+                                                            <?php endforeach;?>
+                                                            </select>
+                                                            <?php endif;?>
+                                                            </td>
+                                                        </tr>
+                                                        <?php endforeach;?>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <input class="btn btn-success btn-sm" type="button" onclick="ajaxRequest('{:url(\'conf\')}','configForm1');return false;" value="提交修改" >
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                        </div>
+
+                                        <div class="tab-pane" id="index">
+                                            <form action="" enctype="multipart/form-data" method="post" id="configForm2">
+                                                <table class="table table-bordered">
+                                                    <thead class="">
+                                                        <tr>
+                                                            <th width="15%">配置名称</th>
+                                                            <th align="left" >配置值(e.g:主标题|副标题)</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($index as $k => $v):?>
+                                                        <tr>
+                                                            <td><?php echo $v['cnname'];?></td>
+                                                            <td align="left">
+                                                            <?php if($v['type']==1):?>
+                                                                <input name="<?php echo $v['enname'];?>" type="text" class="form-control" value="<?php echo $v['value'];?>">
+                                                            <?php elseif($v['type']==2):?>
+                                                                <textarea name="<?php echo $v['enname'];?>" class="form-control" align="left"><?php echo $v['value'];?></textarea>
+                                                            <?php elseif($v['type']==3):
+                                                                if($v['values']){
+                                                                    $arrradio=explode(',', $v['values']);
+                                                                }
+                                                                foreach ($arrradio as $k1 => $v1):
+                                                            ?>
+                                                            <label style="margin-right:15px;">
+                                                            <input <?php if($v['value']==$v1){echo 'checked="checked"';} ?> name="<?php echo $v['enname'];?>" value="<?php echo $v1;?>" type="radio">
+                                                            <span class="text"><?php echo $v1;?></span>
+                                                            </label>
+                                                            <?php endforeach;?>
+                                                            <?php elseif($v['type']==4):?>
+                                                                <label>
+                                                                    <input <?php if($v['value']==$v['values']){echo 'checked="checked"';} ?> name="<?php echo $v['enname'];?>" class="colored-success" value="<?php echo $v['values'];?>" type="checkbox">
+                                                                    <span class="text"><?php echo $v['values'];?></span>
+                                                                </label>
+                                                            <?php elseif($v['type']==5):
+                                                                if($v['values']){
+                                                                    $arrselect=explode(',', $v['values']);
+                                                                }
+                                                            ?>
+                                                            <select name="<?php echo $v['enname'];?>">
+                                                            <?php foreach ($arrselect as $k2 => $v2):?>
+                                                                <option <?php if($v['value']==$v2){echo 'selected="selected"';} ?> value="<?php echo $v2;?>"><?php echo $v2;?></option>
+                                                            <?php endforeach;?>
+                                                            </select>
+                                                            <?php endif;?>
+                                                            </td>
+                                                        </tr>
+                                                        <?php endforeach;?>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <input class="btn btn-success btn-sm" type="button" onclick="ajaxRequest('{:url(\'conf\')}','configForm2');return false;" value="提交修改" >
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                        </div>
+                                        <div class="tab-pane" id="files">
+                                            <form action="<?php echo url('upload');?>" enctype="multipart/form-data" method="post" id="configForm3">
+                                                <table class="table table-bordered">
+                                                    <thead class="">
+                                                        <tr>
+                                                            <th width="15%">配置名称</th>
+                                                            <th width="15%" >配置值</th>
+                                                            <th align="left" >文件</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($files as $k => $v):?>
+                                                        <tr>
+                                                            <td><?php echo $v['cnname'];?></td>
+                                                            <td align="left">
+                                                            <?php if($v['type']==6):?>
+                                                                <input type="file" name="<?php echo $v['enname'];?>"  multiple="multiple" align="left"/>
+                                                            <?php elseif($v['type']==7):?>
+                                                                <input type="file" name="<?php echo $v['enname'];?>[]"  multiple="multiple" align="left"/>
+                                                            <?php endif;?>
+                                                            </td>
+                                                            <td>
+                                                            <?php if($v['type']==6):?>
+                                                                <img src="__IMG__/<?php echo $v['value'];?>" style="max-height: 40px;margin-right:5px">
+                                                            <?php elseif($v['type']==7):?>
+                                                                <?php $banners = explode(',',$v['value']);?>
+                                                                <?php foreach ($banners as $k => $vv):?>
+                                                                <img src="__IMG__/<?php echo $vv;?>" style="max-height: 40px;margin-right:5px">
+                                                                <?php endforeach;?>
+                                                            <?php endif;?>
+                                                            </td>
+                                                        </tr>
+                                                        <?php endforeach;?>
+                                                        <tr>
+                                                            <td colspan="3">
+                                                                <!-- <input class="btn btn-success btn-sm" type="button" onclick="ajaxUploadFiles('<?php echo url("upload");?>','configForm3');return false;" value="提交修改" > -->
+                                                                <input class="btn btn-success btn-sm" type="submit" value="提交修改" >
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                        </div>
+                                        <!-- <div class="tab-pane" id="email">
+                                            <form action="" enctype="multipart/form-data" method="post" id="configForm4">
+                                                <table class="table table-bordered">
+                                                    <thead class="">
+                                                        <tr>
+                                                            <th width="15%">配置名称</th>
+                                                            <th align="left" >配置值</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($email as $k => $v):?>
+                                                        <tr>
+                                                            <td><?php echo $v['cnname'];?></td>
+                                                            <td align="left">
+                                                            <?php if($v['type']==1):?>
+                                                                <input name="<?php echo $v['enname'];?>" type="text" class="form-control" value="<?php echo $v['value'];?>" id="<?php echo $v['enname'];?>">
+                                                            <?php elseif($v['type']==2):?>
+                                                                <textarea name="<?php echo $v['enname'];?>" class="form-control" align="left"><?php echo $v['value'];?></textarea>
+                                                            <?php elseif($v['type']==3):
+                                                                if($v['values']){
+                                                                    $arrradio=explode(',', $v['values']);
+                                                                }
+                                                                foreach ($arrradio as $k1 => $v1):
+                                                            ?>
+                                                            <label style="margin-right:15px;">
+                                                            <input <?php if($v['value']==$v1){echo 'checked="checked"';} ?> name="<?php echo $v['enname'];?>" value="<?php echo $v1;?>" type="radio">
+                                                            <span class="text"><?php echo $v1;?></span>
+                                                            </label>
+                                                            <?php endforeach;?>
+                                                            <?php elseif($v['type']==4):?>
+                                                                <label>
+                                                                    <input <?php if($v['value']==$v['values']){echo 'checked="checked"';} ?> name="<?php echo $v['enname'];?>" class="colored-success" value="<?php echo $v['values'];?>" type="checkbox">
+                                                                    <span class="text"><?php echo $v['values'];?></span>
+                                                                </label>
+                                                            <?php elseif($v['type']==5):
+                                                                if($v['values']){
+                                                                    $arrselect=explode(',', $v['values']);
+                                                                }
+                                                            ?>
+                                                            <select name="<?php echo $v['enname'];?>">
+                                                            <?php foreach ($arrselect as $k2 => $v2):?>
+                                                                <option <?php if($v['value']==$v2){echo 'selected="selected"';} ?> value="<?php echo $v2;?>"><?php echo $v2;?></option>
+                                                            <?php endforeach;?>
+                                                            </select>
+                                                            <?php endif;?>
+                                                            </td>
+                                                        </tr>
+                                                        <?php endforeach;?>
+                                                        <tr>
+                                                            <td>测试邮件接收地址</td>
+                                                            <td><input type="text" class="form-control" id="testmail"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <input class="btn btn-success btn-sm" type="button" onclick="ajaxTestEmail('{:url(\'conf/send\')}');return false;" value="测试发送" >
+                                                                <input class="btn btn-success btn-sm" type="button" onclick="ajaxRequest('{:url(\'conf\')}','configForm4');return false;" value="提交修改" >
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        {include file="../application/admin/common/footer.html" /}
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__ADMIN__/js/jquery-1.10.2.min.js"></script>
+<script src="__ADMIN__/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="__ADMIN__/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="__ADMIN__/js/bootstrap.min.js"></script>
+<script src="__ADMIN__/js/modernizr.min.js"></script>
+<script src="__ADMIN__/js/jquery.nicescroll.js"></script>
+
+<!--common scripts for all pages-->
+{include file="../application/admin/common/global-js.html" /}
+<script type="text/javascript">
+    <?php if($filesuccess!=''):?>
+        layer.msg('<?php echo $filesuccess;?>',{icon:6});
+    <?php endif;?>
+
+    function ajaxUploadFiles(url,formid){
+        var form = new FormData(document.getElementById(formid));
+        $.ajax({
+            url:url,
+            type:"post",
+            data:form,
+            processData:false,
+            contentType:false,
+            success:function(data){
+                console.log(data);
+            },
+            error:function(e){
+                alert("错误！！");
+            }
+        });        
+    }
+
+    function ajaxTestEmail(url){
+        $.post(url,{smtphost:$("#smtphost").val(),smtpname:$("#smtpname").val(),smtppwd:$("#smtppwd").val(),smtpport:$("#smtpport").val(),mailname:$("#mailname").val(),testmail:$("#testmail").val()},function(info){
+            console.log(info)
+            if(info.code === 1){
+                // 提交成功
+                layer.msg(info.msg,{icon:6});
+            }else{
+                // 提交失败
+                layer.msg(info.msg,{icon:5});
+            }
+        });  
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <title>合作伙伴</title>
+    <!-- loadstyle start -->
+    {include file="../application/index/common/layout_css.html" /} 
+    <!-- loadstyle end -->
+</head>
+<body>
+  <!-- header start -->
+  {include file="../application/index/common/header.html" /} 
+  <!-- header end -->
+
+  <!-- banner start -->
+  {include file="../application/index/common/banner.html" /} 
+  <!-- banner end -->
+
+  <div class="hb-back">
+    <div class="container">
+      <div class="clearfix title-header">
+        <h1 class="pull-left title-xs">合作伙伴</h1>
+        <div class="pull-right nav-b">当前位置：<a href="/">首页</a> > <a href="javascript:void">合作伙伴</a></div>
+      </div>
+      <ul class="hb-list clearfix">
+        {volist name="partners" id="partner"}
+            <li><a href="{$partner.url}" target="_blank" title="{$partner.desc}"><img src="__IMG__/{$partner.pic}"></a></li>
+        {/volist}
+      </ul>
+    </div>
+  </div>
+  <!-- footer start -->
+  {include file="../application/index/common/footer.html" /} 
+  <!-- footer end -->
+</body>
+<!-- loadjavascript start -->
+{include file="../application/index/common/layout_js.html" /} 
+<!-- loadjavascript end -->
+
+<script>
+$(function(){
+    $('.slick').slick({
+        autoplay:true,
+        dots: true
+    });
+});
+  </script>
+</html>

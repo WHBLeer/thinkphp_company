@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="{$CONFIG.webdesc}">
+    <meta name="keyword" content="{$CONFIG.webkeyword}">
+
+  <title>政策法规列表 | {$CONFIG.webtitle}</title>
+  <!--responsive table-->
+  <link href="__ADMIN__/css/table-responsive.css" rel="stylesheet" />
+
+  {include file="../application/admin/common/global-css.html" /}
+</head>
+
+<body class="sticky-header">
+<section>
+    <!-- left side start-->
+    {include file="../application/admin/common/menu.html" /}
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        {include file="../application/admin/common/header.html" /}
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>政策法规 </h3>
+            <ul class="breadcrumb">
+                <li> <a href="/admin">首页</a> </li>
+                <li> <a href="javascript:void(0);">政策法规</a> </li>
+                <li class="active"> 政策法规列表 </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <a href="{:url('add')}" class="btn btn-sm btn-info" tooltips="添加政策法规"> <i class="fa fa-plus"></i> 添加政策法规</a>
+                        </header>
+                        <form action="" method="post" id="configForm">
+                        <div class="panel-body">
+                            <section id="unseen">
+                                <table class="table table-hover table-bordered table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th class="numeric">#</th>
+                                        <th>政策法规类别</th>
+                                        <th width="60%">政策法规名称</th>
+                                        <th>添加时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {volist name="regulations" id="regulation"}
+                                    <tr>
+                                        <td>{$regulation.id}</td>
+                                        <td>
+                                            {volist name="items" id="item"}
+                                                {if condition="$regulation['type'] == $item['id']"} 
+                                                    {$item.cnname}
+                                                {/if}
+                                            {/volist}
+                                        </td>
+                                        <td>{$regulation.title}</td>
+                                        <td>{$regulation.create_time}</td>
+                                        <td>
+                                            <a href="{:url('edit',array('id'=>$regulation['id']))}" class="btn btn-primary btn-sm shiny"><i class="fa fa-edit"></i> 编辑</a>
+                                            <a href="javascript:void(0);" onclick="ajaxDelete('{:url(\'del\',array(\'id\'=>$regulation[\'id\']))}');return false;"class="btn btn-danger btn-sm shiny"><i class="fa fa-trash-o"></i> 删除</a>
+                                        </td>
+                                    </tr>
+                                    {/volist}
+                                    </tbody>
+                                </table>
+                                {$regulations->render()}
+                            </section>
+                        </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        {include file="../application/admin/common/footer.html" /}
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__ADMIN__/js/jquery-1.10.2.min.js"></script>
+<script src="__ADMIN__/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="__ADMIN__/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="__ADMIN__/js/bootstrap.min.js"></script>
+<script src="__ADMIN__/js/modernizr.min.js"></script>
+<script src="__ADMIN__/js/jquery.nicescroll.js"></script>
+
+<!--common scripts for all pages-->
+{include file="../application/admin/common/global-js.html" /}
+
+</body>
+</html>

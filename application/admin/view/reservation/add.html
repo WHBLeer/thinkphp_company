@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="{$CONFIG.webdesc}">
+    <meta name="keyword" content="{$CONFIG.webkeyword}">
+
+    <title>预约管理 | {$CONFIG.webtitle}</title>
+
+    {include file="../application/admin/common/global-css.html" /}
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    {include file="../application/admin/common/menu.html" /}
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        {include file="../application/admin/common/header.html" /}
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>入驻管理 </h3>
+            <ul class="breadcrumb">
+                <li> <a href="/admin">首页</a> </li>
+                <li> <a href="javascript:void(0);">入驻管理</a> </li>
+                <li class="active"> 预约管理 </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <div class="form">
+                                <form action="{:url('add')}" class="cmxform form-horizontal adminex-form" id="configForm" method="post" enctype="multipart/form-data" >
+                                    <div class="form-group">
+                                        <label for="companyname" class="control-label col-lg-2 col-sm-3">企业名称</label>
+                                        <div class="col-lg-10 col-sm-9">
+                                            <input class="form-control" name="companyname"  type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="legalperson" class="control-label col-lg-2 col-sm-3">负责人</label>
+                                        <div class="col-lg-10 col-sm-9">
+                                            <input class="form-control" name="legalperson" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="legalphone" class="control-label col-lg-2 col-sm-3">联系电话</label>
+                                        <div class="col-lg-10 col-sm-9">
+                                            <input class="form-control" name="legalphone" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="service" class="control-label col-lg-2 col-sm-3">预约的服务</label>
+                                        <div class="col-lg-10 col-sm-9">
+                                            <input class="form-control" name="service" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="indorsation" class="control-label col-lg-2 col-sm-3">希望获得哪方面的服务和支持</label>
+                                        <div class="col-lg-10 col-sm-9">
+                                            <textarea name="indorsation" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-10">
+                                            <button class="btn btn-success" type="submit"><i class="fa fa-save"></i> 保存</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        {include file="../application/admin/common/footer.html" /}
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__ADMIN__/js/jquery-1.10.2.min.js"></script>
+<script src="__ADMIN__/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="__ADMIN__/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="__ADMIN__/js/bootstrap.min.js"></script>
+<script src="__ADMIN__/js/modernizr.min.js"></script>
+<script src="__ADMIN__/js/jquery.nicescroll.js"></script>
+
+<script type="text/javascript" src="__ADMIN__/js/jquery.validate.min.js"></script>
+<!-- <script src="__ADMIN__/js/validation-init.js"></script> -->
+<script type="text/javascript">
+var Script = function () {
+    // $.validator.setDefaults({
+    //     submitHandler: function() { 
+    //         ajaxRequest('{:url(\'add\')}','configForm');
+    //     }
+    // });
+
+    // $().ready(function() {
+    //     // validate signup form on keyup and submit
+    //     $("#configForm").validate({
+    //         rules: {
+    //             title: "required",
+    //             url: "required",
+    //             pic: "required",
+    //             desc: "required"
+    //         },
+    //         messages: {
+    //             title: "请填写合作伙伴介绍",
+    //             url: "请填写合作伙伴链接",
+    //             pic: "请上传合作伙伴LOGO",
+    //             desc: "请填写合作伙伴介绍"
+    //         }
+    //     });
+    // });
+
+
+}();
+function showPreview(source) {
+    var file = source.files[0];
+    if(window.FileReader) {
+        var fr = new FileReader();
+        var viewPic  = document.getElementById('viewPic');
+        fr.onloadend = function(e) {
+            viewPic.innerHTML = '';
+            viewPic.innerHTML = '<img src="'+e.target.result+'" style="max-height: 100px">';
+        };
+        fr.readAsDataURL(file);
+    }
+}
+// ajax提交包含图片的数据
+function ajaxRequestImg1(url,formid,imgid) {
+    var form = document.getElementById(formid);   
+    var file_obj = document.getElementById(imgid).files[0];
+    console.log(file_obj)
+    var formData =new FormData(form);  
+    formData.append("pic", file_obj); 
+    console.log(formData)
+    $.ajax({
+        url : url,  
+        type : 'POST',  
+        data : formData,  
+        processData: false,  // 告诉jQuery不要去处理发送的数据  
+        contentType: false,  // 告诉jQuery不要去设置Content-Type请求头  
+        dataType:'json',          
+        success:function(info){  
+            console.log(info)
+            if(info.code === 1){
+                // 提交成功
+                setTimeout(function () {location.href = info.url;}, 1000);
+                layer.msg(info.msg,{icon:6});
+            }else{
+                // 提交失败
+                layer.msg(info.msg,{icon:5});
+            }
+        } 
+    })
+}
+</script>
+<!--common scripts for all pages-->
+{include file="../application/admin/common/global-js.html" /}
+
+</body>
+</html>

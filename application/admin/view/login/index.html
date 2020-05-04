@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="登录页面">
+    <meta name="author" content="王宏彬">
+    <link rel="shortcut icon" href="#" type="image/png">
+    <link rel='shortcut icon' href='/favicon.ico'> 
+    <title>登录|瑞胜微赢孵化器官方网站管理后台</title>
+    <link href="__ADMIN__/css/style.css" rel="stylesheet">
+    <link href="__ADMIN__/css/style-responsive.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="__ADMIN__/js/html5shiv.js"></script>
+    <script src="__ADMIN__/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="login-body">
+<div class="container">
+    <form class="form-signin" action="" method="post" id="login-form">
+        <div class="form-signin-heading text-center">
+            <!-- <h1 class="sign-title">登录</h1> -->
+            <img src="__ADMIN__/images/login-logo.png" alt=""/>
+        </div>
+        <div class="login-wrap">
+            <input class="form-control" placeholder="用户名" name="name" type="text" autofocus>
+            <input class="form-control" placeholder="密码" name="password" type="password">
+            <input class="form-control" placeholder="验证码" style="width: 170px;float: left;margin-right: 10px;" name="code" type="text">
+            <img src="{:captcha_src()}" onclick="this.src='{:captcha_src()}?'+Math.random();" width="110" style=" height: 39px;border-radius: 5px;float:left; cursor:pointer;border: 1px #ccc solid;" alt="captcha" />
+
+            <button class="btn btn-lg btn-login btn-block" type="button" onclick="ajaxRequest('{:url(\'login/index\')}','login-form');">立即登录</button>
+            <!-- <div class="registration">
+                没有账号? 去<a class="" href="{:url('user/register')}">注册</a>
+            </div> -->
+            <!-- <label class="checkbox">
+                <input type="checkbox" value="remember-me"> 保持登录
+                <span class="pull-right">
+                    <a data-toggle="modal" href="#myModal"> 找回密码?</a>
+                </span>
+            </label> -->
+        </div>
+        <!-- Modal -->
+        <!-- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">忘记密码 ?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>请输入您的登录邮箱用以找回密码</p>
+                        <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                        <button class="btn btn-primary" type="button">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- modal -->
+    </form>
+</div>
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__ADMIN__/js/jquery-1.10.2.min.js"></script>
+<script src="__ADMIN__/js/bootstrap.min.js"></script>
+<script src="__ADMIN__/js/modernizr.min.js"></script>
+<script type="text/javascript" src="__COMMON__/layer/layer.js"></script>
+<script type="text/javascript">
+    // ajax提交数据
+    function ajaxRequest(url,formid) {
+        var data = $("#"+formid).serialize();
+        $.post(url,data,function(info){
+            console.log(info)
+            if(info.code === 1){
+                // 提交成功
+                setTimeout(function () {location.href = info.url;}, 1000);
+                layer.msg(info.msg,{icon:6});
+            }else{
+                // 提交失败
+                layer.msg(info.msg,{icon:5});
+            }
+        });
+    }
+</script>
+</body>
+</html>

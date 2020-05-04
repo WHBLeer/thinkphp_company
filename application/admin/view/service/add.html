@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="{$CONFIG.webdesc}">
+    <meta name="keyword" content="{$CONFIG.webkeyword}">
+
+    <title>添加服务项目 | {$CONFIG.webtitle}</title>
+
+    {include file="../application/admin/common/global-css.html" /}
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    {include file="../application/admin/common/menu.html" /}
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        {include file="../application/admin/common/header.html" /}
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>服务项目 </h3>
+            <ul class="breadcrumb">
+                <li> <a href="/admin">首页</a> </li>
+                <li> <a href="javascript:void(0);">服务项目</a> </li>
+                <li class="active"> 添加服务项目 </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <div class="form">
+                                <form action="{:url('edit')}" class="cmxform form-horizontal adminex-form" id="configForm" method="post" enctype="multipart/form-data" >
+                                    <div class="form-group">
+                                        <label for="title" class="control-label col-lg-2 col-sm-3">服务项目名称<font class="red"> *</font></label>
+                                        <div class="col-lg-10 col-sm-9">
+                                            <input class="form-control" name="title"  type="text">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="type" value="{$type}">
+                                    {if condition="$type eq 1"}
+                                    <div class="form-group">
+                                        <label for="pic" class="control-label col-lg-2 col-sm-3">服务项目icon<font class="red"> *</font></label>
+                                        <div class="col-lg-10 col-sm-9">
+                                            <label style="margin-right:20px"><input type="radio" name="icon" value="fw-icon01" /><img src="__INDEX__/images/fw01.png" height="25" /></label>
+                                            <label style="margin-right:20px"><input type="radio" name="icon" value="fw-icon02"/><img src="__INDEX__/images/fw02.png" height="25" /></label>
+                                            <label style="margin-right:20px"><input type="radio" name="icon" value="fw-icon03"/><img src="__INDEX__/images/fw03.png" height="25" /></label>
+                                            <label style="margin-right:20px"><input type="radio" name="icon" value="fw-icon04"/><img src="__INDEX__/images/fw04.png" height="25" /></label>
+                                            <label style="margin-right:20px"><input type="radio" name="icon" value="fw-icon05"/><img src="__INDEX__/images/fw05.png" height="25" /></label>
+                                            <label style="margin-right:20px"><input type="radio" name="icon" value="fw-icon06"/><img src="__INDEX__/images/fw06.png" height="25" /></label>
+                                        </div>
+                                    </div>
+                                    {/if}
+                                    <div class="form-group">
+                                        <label for="desc" class="control-label col-lg-2 col-sm-3">服务项目介绍<font class="red"> *</font></label>
+                                        <div class="col-lg-10 col-sm-9">
+                                            <textarea id="news-content" name="desc" ></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-10">
+                                            <button class="btn btn-success" type="submit"><i class="fa fa-save"></i> 保存</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        {include file="../application/admin/common/footer.html" /}
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__ADMIN__/js/jquery-1.10.2.min.js"></script>
+<script src="__ADMIN__/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="__ADMIN__/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="__ADMIN__/js/bootstrap.min.js"></script>
+<script src="__ADMIN__/js/modernizr.min.js"></script>
+<script src="__ADMIN__/js/jquery.nicescroll.js"></script>
+
+<script type="text/javascript" src="__ADMIN__/js/jquery.validate.min.js"></script>
+<!-- <script src="__ADMIN__/js/validation-init.js"></script> -->
+<script type="text/javascript" charset="utf-8" src="__ADMIN__/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ADMIN__/ueditor/ueditor.all.min.js"> </script>
+<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<script type="text/javascript" charset="utf-8" src="__ADMIN__/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+var Script = function () {
+    $.validator.setDefaults({
+        submitHandler: function() { 
+            ajaxRequest('{:url(\'add\')}','configForm');
+        }
+    });
+
+    $().ready(function() {
+        var ue = UE.getEditor("news-content");
+        // validate signup form on keyup and submit
+        $("#configForm").validate({
+            rules: {
+                title: "required",
+                icon: "required",
+                desc: "required"
+            },
+            messages: {
+                title: "请填写服务项目名称",
+                icon: "请选择服务项目icon",
+                desc: "请填写服务项目介绍"
+            }
+        });
+    });
+
+
+}();
+</script>
+<!--common scripts for all pages-->
+{include file="../application/admin/common/global-js.html" /}
+
+</body>
+</html>

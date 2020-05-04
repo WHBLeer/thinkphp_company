@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="{$CONFIG.webdesc}">
+    <meta name="keyword" content="{$CONFIG.webkeyword}">
+
+  <title>办公环境 | {$CONFIG.webtitle}</title>
+  <!--responsive table-->
+  <link href="__ADMIN__/css/table-responsive.css" rel="stylesheet" />
+
+  {include file="../application/admin/common/global-css.html" /}
+</head>
+
+<body class="sticky-header">
+<section>
+    <!-- left side start-->
+    {include file="../application/admin/common/menu.html" /}
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        {include file="../application/admin/common/header.html" /}
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>办公环境 </h3>
+            <ul class="breadcrumb">
+                <li> <a href="/admin">首页</a> </li>
+                <li> <a href="javascript:void(0);">走进孵化器</a> </li>
+                <li class="active"> 办公环境 </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <a href="{:url('add')}" class="btn btn-sm btn-info" tooltips="添加办公环境"> <i class="fa fa-plus"></i> 添加办公环境</a>
+                        </header>
+                        <form action="" method="post" id="configForm">
+                        <div class="panel-body">
+                            <section id="unseen">
+                                <table class="table table-hover table-bordered table-striped table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th class="numeric" tooltips="点击更新排序" onclick="ajaxRequest('{url:\'add\'}','configForm');return false;" style="cursor: pointer;"><i class="fa fa-sort"></i> 排序</th>
+                                            <th>办公环境名称</th>
+                                            <th>办公环境照片</th>
+                                            <th>添加时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {volist name="officeres" id="office"}
+                                        <tr>
+                                            <td>{$office.id}</td>
+                                            <td><input name="{$office.id}" class="input-sm form-control" type="text" style="width:40px; height: 25px; text-align:center;" value="{$office.sort}"></td>
+                                            <td>{$office.title}</td>
+                                            <td>
+                                                {if condition="$office['album'] neq ''"}
+                                                <img src="__IMG__/{$office.album}" alt="{$office.title}" title="{$office.album}" height="30" />
+                                                {else /}暂无照片{/if}
+                                            </td>
+                                            <td>{$office.create_time}</td>
+                                            <td>
+                                                <a href="{:url('edit',array('id'=>$office['id']))}" class="btn btn-primary btn-sm shiny"><i class="fa fa-edit"></i> 编辑</a>
+                                                <a href="javascript:void(0);" onclick="ajaxDelete('{:url(\'del\',array(\'id\'=>$office[\'id\']))}');return false;" class="btn btn-danger btn-sm shiny"><i class="fa fa-trash-o"></i> 删除</a>
+                                            </td>
+                                        </tr>
+                                        {/volist}
+                                    </tbody>
+                                </table>
+                                {$officeres->render()}
+                            </section>
+                        </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        {include file="../application/admin/common/footer.html" /}
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__ADMIN__/js/jquery-1.10.2.min.js"></script>
+<script src="__ADMIN__/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="__ADMIN__/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="__ADMIN__/js/bootstrap.min.js"></script>
+<script src="__ADMIN__/js/modernizr.min.js"></script>
+<script src="__ADMIN__/js/jquery.nicescroll.js"></script>
+
+<!--common scripts for all pages-->
+{include file="../application/admin/common/global-js.html" /}
+
+</body>
+</html>

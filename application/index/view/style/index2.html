@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <title>员工风采</title>
+    <!-- loadstyle start -->
+    {include file="../application/index/common/layout_css.html" /} 
+    <!-- loadstyle end -->
+    <style type="text/css">
+    	.left-line {
+		    border-left: 1px #ddd solid;
+		}
+    </style>
+</head>
+<body>
+  <!-- header start -->
+  {include file="../application/index/common/header.html" /} 
+  <!-- header end -->
+
+  <!-- banner start -->
+  {include file="../application/index/common/banner.html" /} 
+  <!-- banner end -->
+  <div class="hb-back">
+    <div class="container">
+      <div class="clearfix title-header">
+          <h1 class="pull-left title-xs">员工风采</h1>
+          <div class="pull-right nav-b">当前位置：<a href="/">首页</a> > <a href="javascript:void">员工风采</a></div>
+      </div>
+      <div class="">
+	        {volist name="styleres" id="style"}
+	      	<div class="row" style="margin: 20px 0;background-color: #fff;">
+	        <div class="col-md-2 col-xs-12" align="center" style="height: 169px;max-height: 169px;position: relative;">
+	          <div class="img-hide">
+	          	<img src="__IMG__/{$style.photo}" style="max-height:160px;position: absolute;top: 0;right: 0;bottom: 0;left: 0;margin: auto;">
+	          </div>
+	        </div>
+	        <div class="col-md-10 col-xs-12 left-line">
+	          <div class="news-tt"><a href="{:url('style/index')}">{$style.name}</a></div>
+	          <div class="news-p">{$style.content}</div>
+	        </div>
+	      </div>
+	      {/volist}
+      </div>
+      {$styleres->render()}
+    </div>
+  </div>
+  <div class="container">
+    <h1 class="title">合作伙伴</h1>
+    <div class="hb-swiper">
+      {volist name="partners" id="partner"}
+        <div>
+          <a href="{$partner.url}" target="_blank" title="{$partner.desc}"><img src="__IMG__/{$partner.pic}"></a>
+        </div>
+      {/volist}
+    </div>
+  </div>
+  <!-- footer start -->
+  {include file="../application/index/common/footer.html" /} 
+  <!-- footer end -->
+</body>
+<!-- loadjavascript start -->
+{include file="../application/index/common/layout_js.html" /} 
+<!-- loadjavascript end -->
+
+</html>

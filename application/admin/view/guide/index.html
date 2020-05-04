@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-ch">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="{$CONFIG.webdesc}">
+    <meta name="keyword" content="{$CONFIG.webkeyword}">
+
+  <title>申请列表 | {$CONFIG.webtitle}</title>
+  <!--responsive table-->
+  <link href="__ADMIN__/css/table-responsive.css" rel="stylesheet" />
+
+  {include file="../application/admin/common/global-css.html" /}
+</head>
+
+<body class="sticky-header">
+<section>
+    <!-- left side start-->
+    {include file="../application/admin/common/menu.html" /}
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        {include file="../application/admin/common/header.html" /}
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>入驻管理 </h3>
+            <ul class="breadcrumb">
+                <li> <a href="/admin">首页</a> </li>
+                <li> <a href="javascript:void(0);">入驻管理</a> </li>
+                <li class="active"> 申请列表 </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <a href="{:url('excel')}" class="btn btn-sm btn-info" tooltips="数据导出"> <i class="fa fa-file-excel-o"></i> 数据导出</a>
+                        </header>
+                        <form action="" method="post" id="configForm">
+                        <div class="panel-body">
+                            <section id="unseen">
+                                <table class="table table-hover table-bordered table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th class="numeric">#</th>
+                                        <th>企业名称</th>
+                                        <th>企业负责人</th>
+                                        <th>联系电话</th>
+                                        <th>提交时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {volist name="guideres" id="guide"}
+                                    <tr>
+                                        <td>{$guide.id}</td>
+                                        <td>{$guide.companyname}</td>
+                                        <td>{$guide.legalperson}</td>
+                                        <td>{$guide.legalphone}</td>
+                                        <td>{$guide.create_time}</td>
+                                        <td>
+                                            <!-- <a href="{:url('edit',array('id'=>$guide['id']))}" class="btn btn-primary btn-sm shiny"><i class="fa fa-edit"></i> 编辑</a> -->
+                                            <a href="javascript:void(0);" onclick="ajaxDelete('{:url(\'del\',array(\'id\'=>$guide[\'id\']))}');return false;" class="btn btn-danger btn-sm shiny"><i class="fa fa-trash-o"></i> 删除</a>
+                                        </td>
+                                    </tr>
+                                    {/volist}
+                                    </tbody>
+                                </table>
+                                {$guideres->render()}
+                            </section>
+                        </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        {include file="../application/admin/common/footer.html" /}
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__ADMIN__/js/jquery-1.10.2.min.js"></script>
+<script src="__ADMIN__/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="__ADMIN__/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="__ADMIN__/js/bootstrap.min.js"></script>
+<script src="__ADMIN__/js/modernizr.min.js"></script>
+<script src="__ADMIN__/js/jquery.nicescroll.js"></script>
+
+<!--common scripts for all pages-->
+{include file="../application/admin/common/global-js.html" /}
+
+</body>
+</html>

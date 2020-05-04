@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <title>提交成功</title>
+    <!-- loadstyle start -->
+    {include file="../application/index/common/layout_css.html" /} 
+    <!-- loadstyle end -->
+</head>
+<body>
+  <!-- header start -->
+  {include file="../application/index/common/header.html" /} 
+  <!-- header end -->
+
+  <!-- banner start -->
+  {include file="../application/index/common/banner.html" /} 
+  <!-- banner end -->
+  <div class="hb-back">
+    <div class="container">
+      <div class="form-box">
+        <div class="tj-title text-center">创文时代创业孵化器入驻申请表<br><span>(公司资料收集表)</span></div>
+        <div class="text-center icon-cg"><img src="__INDEX__/images/icon-cg.png"><br>提交成功</div>
+        <div class="cg-ts text-center">工作人员将尽快联系您，请耐心等候</div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h1 class="title">合作伙伴</h1>
+    <div class="hb-swiper">
+      {volist name="partners" id="partner"}
+        <div>
+          <a href="{$partner.url}" target="_blank" title="{$partner.desc}"><img src="__IMG__/{$partner.pic}"></a>
+        </div>
+      {/volist}
+    </div>
+  </div>
+  <!-- footer start -->
+  {include file="../application/index/common/footer.html" /} 
+  <!-- footer end -->
+</body>
+<!-- loadjavascript start -->
+{include file="../application/index/common/layout_js.html" /} 
+<!-- loadjavascript end -->
+</html>

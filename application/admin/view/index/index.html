@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="Zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="{$CONFIG.webdesc}">
+    <meta name="keyword" content="{$CONFIG.webkeyword}">
+
+    <title>{$CONFIG.webtitle}</title>
+    <!--icheck-->
+    <link href="__ADMIN__/js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
+    <link href="__ADMIN__/js/iCheck/skins/square/square.css" rel="stylesheet">
+    <link href="__ADMIN__/js/iCheck/skins/square/red.css" rel="stylesheet">
+    <link href="__ADMIN__/js/iCheck/skins/square/blue.css" rel="stylesheet">
+
+    <!--dashboard calendar-->
+    <link href="__ADMIN__/css/clndr.css" rel="stylesheet">
+
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="__ADMIN__/js/morris-chart/morris.css">
+
+    <!--common-->
+    {include file="../application/admin/common/global-css.html" /}
+</head>
+<body class="sticky-header">
+<section>
+    <!-- left side start-->
+    {include file="../application/admin/common/menu.html" /}
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+        <!-- header section start-->
+        {include file="../application/admin/common/header.html" /}
+        <!-- header section end-->
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>中源瑞盛官方网站管理后台</h3>
+            <ul class="breadcrumb">
+                <li><a href="/admin">后台</a></li>
+                <li class="active"> 中源瑞盛官方网站管理后台 </li>
+            </ul>
+            
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <!-- <div class="wrapper">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row state-overview">
+                        <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="panel purple">
+                                <div class="symbol">
+                                    <i class="fa fa-book"></i>
+                                </div>
+                                <div class="state-value">
+                                    <div class="value">230</div>
+                                    <div class="title">新闻动态/文章内容</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="panel red">
+                                <div class="symbol">
+                                    <i class="fa fa-bank"></i>
+                                </div>
+                                <div class="state-value">
+                                    <div class="value">3490</div>
+                                    <div class="title">入驻企业申请</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row state-overview">
+                        <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="panel blue">
+                                <div class="symbol">
+                                    <i class="fa fa-users"></i>
+                                </div>
+                                <div class="state-value">
+                                    <div class="value">22014</div>
+                                    <div class="title"> 我们的合作伙伴</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="panel green">
+                                <div class="symbol">
+                                    <i class="fa fa-gavel"></i>
+                                </div>
+                                <div class="state-value">
+                                    <div class="value">390</div>
+                                    <div class="title"> 我们的服务项目</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel">
+                        <div class="panel-body extra-pad">
+                            <h4 class="pros-title">prospective <span>leads</span></h4>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-4">
+                                    <div id="p-lead-1"></div>
+                                    <p class="p-chart-title">Laptop</p>
+                                </div>
+                                <div class="col-sm-4 col-xs-4">
+                                    <div id="p-lead-2"></div>
+                                    <p class="p-chart-title">iPhone</p>
+                                </div>
+                                <div class="col-sm-4 col-xs-4">
+                                    <div id="p-lead-3"></div>
+                                    <p class="p-chart-title">iPad</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel">
+                        <div class="panel-body extra-pad">
+                            <div class="col-sm-6 col-xs-6">
+                                <div class="v-title">Visits</div>
+                                <div class="v-value">10,090</div>
+                                <div id="visit-1"></div>
+                                <div class="v-info">Pages/Visit</div>
+                            </div>
+                            <div class="col-sm-6 col-xs-6">
+                                <div class="v-title">Unique Visitors</div>
+                                <div class="v-value">8,173</div>
+                                <div id="visit-2"></div>
+                                <div class="v-info">Avg. Visit Duration</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                    <div class="panel green-box">
+                        <div class="panel-body extra-pad">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="knob">
+                                        <span class="chart" data-percent="79">
+                                            <span class="percent">79% <span class="sm">New Visit</span></span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="knob">
+                                        <span class="chart" data-percent="56">
+                                            <span class="percent">56% <span class="sm">Bounce rate</span></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        {include file="../application/admin/common/footer.html" /}
+        <!--footer section end-->
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__ADMIN__/js/jquery-1.10.2.min.js"></script>
+<script src="__ADMIN__/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="__ADMIN__/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="__ADMIN__/js/bootstrap.min.js"></script>
+<script src="__ADMIN__/js/modernizr.min.js"></script>
+<script src="__ADMIN__/js/jquery.nicescroll.js"></script>
+
+<!--easy pie chart-->
+<script src="__ADMIN__/js/easypiechart/jquery.easypiechart.js"></script>
+<script src="__ADMIN__/js/easypiechart/easypiechart-init.js"></script>
+
+<!--Sparkline Chart-->
+<script src="__ADMIN__/js/sparkline/jquery.sparkline.js"></script>
+<script src="__ADMIN__/js/sparkline/sparkline-init.js"></script>
+
+<!--icheck -->
+<script src="__ADMIN__/js/iCheck/jquery.icheck.js"></script>
+<script src="__ADMIN__/js/icheck-init.js"></script>
+
+<!-- jQuery Flot Chart-->
+<script src="__ADMIN__/js/flot-chart/jquery.flot.js"></script>
+<script src="__ADMIN__/js/flot-chart/jquery.flot.tooltip.js"></script>
+<script src="__ADMIN__/js/flot-chart/jquery.flot.resize.js"></script>
+
+
+<!--Morris Chart-->
+<script src="__ADMIN__/js/morris-chart/morris.js"></script>
+<script src="__ADMIN__/js/morris-chart/raphael-min.js"></script>
+
+<!--Calendar-->
+<script src="__ADMIN__/js/calendar/clndr.js"></script>
+<script src="__ADMIN__/js/calendar/evnt.calendar.init.js"></script>
+<script src="__ADMIN__/js/calendar/moment-2.2.1.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+
+<!--common scripts for all pages-->
+{include file="../application/admin/common/global-js.html" /}
+</body>
+</html>

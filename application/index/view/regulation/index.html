@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <title>政策法规</title>
+    <!-- loadstyle start -->
+    {include file="../application/index/common/layout_css.html" /} 
+    <!-- loadstyle end -->
+</head>
+<body>
+  <!-- header start -->
+  {include file="../application/index/common/header.html" /} 
+  <!-- header end -->
+
+  <!-- banner start -->
+  {include file="../application/index/common/banner.html" /} 
+  <!-- banner end -->
+  <div class="hb-back">
+    <div class="container">
+      <div class="news-click nav-open">政策法规<span><i class="glyphicon glyphicon-menu-down"></i></span></div>
+      <div class="clearfix list-header title-header">
+        <ul class="pull-left clearfix list-tabs">
+          <span class="nav-open"><i class="glyphicon glyphicon-remove"></i></span>
+          {volist name="items" id="item"}
+          <li {if condition="$item['id'] eq $type"}class="active"{/if}><a href="{:url('regulation/index',array('type'=>$item['id']))}">{$item.cnname}</a></li>
+                {/volist}
+        </ul>
+	        <div class="pull-right nav-b">当前位置：<a href="/">首页</a> > <a href="javascript:void">政策法规</a></div>
+      </div>
+      <ul class="news-list news-list-ul clearfix">
+        {volist name="regulationres" id="regulation"}
+        <li>
+          <div class="news-img img-hide"><a href="{:url('regulation/detail',array('id'=>$regulation['id']))}"><img src="__INDEX__/images/banner.jpg"></a></div>
+          <div class="news-tt"><a href="{:url('regulation/detail',array('id'=>$regulation['id']))}">{$regulation.title}</a></div>
+          <!-- <div class="news-p">{$regulation.content}</div> -->
+          <div class="news-bottom">{$regulation.create_time}<a href="{:url('regulation/detail',array('id'=>$regulation['id']))}">阅读详细</a></div>
+        </li>
+      {/volist}
+      </ul>
+      {$regulationres->render()}
+    </div>
+  </div>
+  <div class="container">
+    <h1 class="title">合作伙伴</h1>
+    <div class="hb-swiper">
+      {volist name="partners" id="partner"}
+        <div>
+          <a href="{$partner.url}" target="_blank" title="{$partner.desc}"><img src="__IMG__/{$partner.pic}"></a>
+        </div>
+      {/volist}
+    </div>
+  </div>
+  <!-- footer start -->
+  {include file="../application/index/common/footer.html" /} 
+  <!-- footer end -->
+</body>
+<!-- loadjavascript start -->
+{include file="../application/index/common/layout_js.html" /} 
+<!-- loadjavascript end -->
+
+</html>

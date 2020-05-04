@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="{$CONFIG.webdesc}">
+    <meta name="keyword" content="{$CONFIG.webkeyword}">
+
+    <title>编辑配置|{$CONFIG.webtitle}</title>
+
+    {include file="../application/admin/common/global-css.html" /}
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    {include file="../application/admin/common/menu.html" /}
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        {include file="../application/admin/common/header.html" /}
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>系统配置 </h3>
+            <ul class="breadcrumb">
+                <li> <a href="/admin">首页</a> </li>
+                <li> <a href="javascript:void(0);">系统配置</a> </li>
+                <li class="active"> 编辑配置 </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <div class="form">
+                                <form class="cmxform form-horizontal adminex-form" id="configForm" method="post" action="">
+                                    <input value="{$confs.id}" name="id"  type="hidden" >
+                                    <div class="form-group">
+                                        <label for="username" class="control-label col-lg-2 col-sm-3">中文名称<font class="red"> *</font></label>
+                                        <div class="col-lg-10 col-sm-9">
+                                            <input class="form-control"  placeholder="eg:网站标题" name="cnname"  type="text" value="{$confs.cnname}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username" class="control-label col-lg-2 col-sm-3">英文名称<font class="red"> *</font></label>
+                                        <div class="col-lg-10 col-sm-9">
+                                            <input class="form-control"  placeholder="eg:webtitle" name="enname"  type="text" value="{$confs.enname}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username" class="control-label col-lg-2 col-sm-3">配置类型<font class="red"> *</font></label>
+                                        <div class="col-lg-10 col-sm-9">
+                                            <select name="type" class="form-control">
+                                                <option value="">请选择</option>
+                                                <option value="1">单行文本</option>
+                                                <option value="2">多行文本</option>
+                                                <option value="3">单选按钮</option>
+                                                <option value="4">复选框</option>
+                                                <option value="5">下拉菜单</option>
+                                                <option value="6">单文件上传</option>
+                                                <option value="7">多文件上传</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username" class="control-label col-lg-2 col-sm-3">可选值&nbsp; &nbsp;</label>
+                                        <div class="col-lg-10 col-sm-9">
+                                            <textarea name="values" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-10">
+                                            <button class="btn btn-success" type="submit"><i class="fa fa-save"></i> 保存</button>
+                                            <button class="btn btn-default" type="button"><i class="fa fa-times"></i> 取消</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        {include file="../application/admin/common/footer.html" /}
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__ADMIN__/js/jquery-1.10.2.min.js"></script>
+<script src="__ADMIN__/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="__ADMIN__/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="__ADMIN__/js/bootstrap.min.js"></script>
+<script src="__ADMIN__/js/modernizr.min.js"></script>
+<script src="__ADMIN__/js/jquery.nicescroll.js"></script>
+
+<script type="text/javascript" src="__ADMIN__/js/jquery.validate.min.js"></script>
+<!-- <script src="__ADMIN__/js/validation-init.js"></script> -->
+<script type="text/javascript">
+    var Script = function () {
+
+    $.validator.setDefaults({
+        submitHandler: function() { 
+            ajaxRequest('{:url(\'edit\')}','configForm');
+        }
+    });
+
+    $().ready(function() {
+        // validate signup form on keyup and submit
+        $("#configForm").validate({
+            rules: {
+                cnname: "required",
+                enname: "required",
+                type: "required"
+            },
+            messages: {
+                cnname: "请填写配置中文名称",
+                enname: "请填写配置英文名称",
+                type: "请选择配置类别"
+            }
+        });
+    });
+
+
+}();
+</script>
+<!--common scripts for all pages-->
+{include file="../application/admin/common/global-js.html" /}
+
+</body>
+</html>

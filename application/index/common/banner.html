@@ -1,0 +1,26 @@
+{if condition="request()->controller() eq 'Index' "}
+	<!-- 首页banner -->
+    <div class="slick">
+	    {if condition="$site_conf['index_banner'] neq '' "}
+            <?php $index_banner = explode(',',$site_conf['index_banner']);?>
+            <?php foreach ($index_banner as $k => $vv):?>
+            <div><img src="__IMG__/<?php echo $vv;?>"></div>
+            <?php endforeach;?>
+	    {else /}
+	    	<div><img src="__INDEX__/images/banner.jpg"></div>
+	    {/if}
+  	</div>
+{else /}
+	<!-- 内页banner -->
+    <div>
+    {if condition="$site_conf['inner_banner'] neq '' "}
+    	<img src="__IMG__/{$site_conf.inner_banner}">
+    {else /}
+    	<img src="__INDEX__/images/banner-sm.png">
+    {/if}
+    </div>
+{/if}
+
+<!-- <?php echo 'module: '.request()->module(); ?>
+<?php echo 'controller: '.request()->controller(); ?>
+<?php echo 'action: '.request()->action(); ?> -->

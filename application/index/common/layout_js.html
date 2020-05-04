@@ -1,0 +1,76 @@
+    <script src="__INDEX__/js/jquery.min.js"></script>
+	<script src="__INDEX__/js/slick.js"></script>
+	<script src="__INDEX__/js/bootstrap.min.js"></script>
+	<script src="__INDEX__/js/vidbg.js"></script> 
+	{if condition="request()->module() eq 'index' "}
+		<script type="text/javascript">
+		    jQuery(function($){
+			  	$('.section-second').vidbg({
+			      	'mp4': '__INDEX__/media/video.mp4',
+			      	'poster': '__INDEX__/media/fallback.jpg',
+			  	}, {
+			    	// Options
+			    	muted: true,
+			    	loop: true,
+					overlay: true,
+			  	});
+			});
+			$(function(){
+			    $('.slick').slick({
+			        autoplay:true,
+			        dots: true
+			    });
+			});
+
+		</script>
+	{/if}
+
+	<script type="text/javascript">
+		$(".nav-list li span").click(function(){
+			if($(this).parents("li").find(".nav-down").is(":hidden")){
+	            $(".nav-list li span").removeClass("active");
+	            $(".nav-down").slideUp("slow");
+	            $(this).addClass("active");
+	            $(this).parents("li").find(".nav-down").slideDown("slow");  
+	        }else{
+	            $(this).removeClass("active");
+	            $(this).parents("li").find(".nav-down").slideUp("slow");
+			}
+		});
+	  	$(".menu-button").click(function(){
+			$(".nav-down").slideUp("slow");
+			$(this).toggleClass("cross");
+			if($(".nav-list").is(":hidden")){
+				$(".nav-list").slideDown("slow");  
+			}else{
+				$(".nav-list").slideUp("slow");
+			}
+	  	}); 
+		$(function () {
+		    var winWide = window.screen.width;
+		    var wideScreen = false;
+		    if (winWide >= 768) {
+				$(function(){
+				    $('.hb-swiper').slick({
+				        autoplay:true,
+				        infinite: true,
+				        dots: true,
+				        slidesToShow: 6,
+
+				        slidesToScroll: 6
+				    });
+				});
+			} else {
+				$(function(){
+				    $('.hb-swiper').slick({
+				        autoplay:true,
+				        infinite: true,
+				        dots: true,
+				        slidesToShow: 2,
+
+				        slidesToScroll: 2
+				    });
+				});
+			}
+		})
+	</script>

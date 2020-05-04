@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="{$CONFIG.webdesc}">
+    <meta name="keyword" content="{$CONFIG.webkeyword}">
+
+    <title>编辑公司介绍 | {$CONFIG.webtitle}</title>
+
+    {include file="../application/admin/common/global-css.html" /}
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    {include file="../application/admin/common/menu.html" /}
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        {include file="../application/admin/common/header.html" /}
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>账户中心 </h3>
+            <ul class="breadcrumb">
+                <li> <a href="/admin">首页</a> </li>
+                <li> <a href="javascript:void(0);">账户中心</a> </li>
+                <li class="active"> 编辑账号信息 </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <div class="profile-pic text-center" onclick="document.getElementById('avatar').click()" style="cursor: pointer;" title="点击更换头像">
+                                        <img alt="" src="__IMG__/{$admin.avatar}" alt="{$admin.nickname}" id="adminAvatar">
+                                        <form action="{:url('avatar')}" id="avatarForm" method="post" enctype="multipart/form-data" >
+		                                    <input type="hidden" name="id" value="{$admin.id}" />
+	                                        <input type="file" name="avatar" id="avatar" onchange="showPreview(this)" style="display: none">
+	                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <ul class="p-info">
+                                        <li>
+                                            <div class="title">最后修改时间</div>
+                                            <div class="desk">{$admin.create_time}</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                        	<section class="panel">
+		                        <header class="panel-heading custom-tab tab-right ">
+		                            <ul class="nav nav-tabs pull-right">
+		                                <li class="active">
+		                                    <a href="#baseinfo" data-toggle="tab">
+		                                        <i class="fa fa-user"></i>基本信息
+		                                    </a>
+		                                </li>
+		                                <li class="">
+		                                    <a href="#pwdinfo" data-toggle="tab">
+		                                        <i class="fa fa-key"></i>修改密码
+		                                    </a>
+		                                </li>
+		                            </ul>
+		                        </header>
+		                        <div class="panel-body">
+		                            <div class="tab-content">
+		                                <div class="tab-pane active" id="baseinfo">
+		                                	<form action="{:url('info')}" class="cmxform form-horizontal adminex-form" id="configForm" method="post" enctype="multipart/form-data" >
+			                                    <input type="hidden" name="id" value="{$admin.id}" />
+			                                    <div class="form-group">
+			                                        <label for="title" class="control-label col-lg-2 col-sm-2">昵称</label>
+			                                        <div class="col-lg-10 col-sm-10">
+			                                            <input class="form-control" value="{$admin.nickname}" placeholder="管理员昵称，不能作为登录名使用" name="nickname"  type="text">
+			                                        </div>
+			                                    </div>
+			                                    <div class="form-group">
+			                                        <label for="email" class="control-label col-lg-2 col-sm-2">邮箱</label>
+			                                        <div class="col-lg-10 col-sm-10">
+			                                            <input class="form-control" value="{$admin.email}" placeholder="常用邮箱" name="email" type="text" />
+			                                        </div>
+			                                    </div>
+			                                    <div class="form-group">
+			                                        <label for="telephone" class="control-label col-lg-2 col-sm-2">电话</label>
+			                                        <div class="col-lg-10 col-sm-10">
+			                                            <input class="form-control" value="{$admin.telephone}" placeholder="联系电话" name="telephone" type="text" />
+			                                        </div>
+			                                    </div>
+			                                    <div class="form-group">
+			                                        <label for="address" class="control-label col-lg-2 col-sm-2">地址</label>
+			                                        <div class="col-lg-10 col-sm-10">
+			                                            <input class="form-control" value="{$admin.address}" placeholder="地址" name="address" type="text" />
+			                                        </div>
+			                                    </div>
+		
+			                                    <div class="form-group">
+			                                        <div class="col-lg-offset-2 col-lg-10">
+			                                            <button class="btn btn-success" type="submit" onclick="ajaxRequest('{:url(\'info\')}','configForm');return false;"><i class="fa fa-save"></i> 保存</button>
+			                                        </div>
+			                                    </div>
+			                                </form>
+		                                </div>
+		                                <div class="tab-pane" id="pwdinfo">
+											<form action="{:url('pwd')}" class="cmxform form-horizontal adminex-form" id="pwdForm" method="post" enctype="multipart/form-data" >
+			                                    <input type="hidden" name="id" value="{$admin.id}" />
+			                                    <input type="hidden" name="name" value="{$admin.name}" />
+			                                    <div class="form-group">
+			                                        <label for="title" class="control-label col-lg-2 col-sm-2">原始密码</label>
+			                                        <div class="col-lg-10 col-sm-10">
+			                                            <input class="form-control" placeholder="请输入原密码" name="oldpwd" type="password">
+			                                        </div>
+			                                    </div>
+			                                    <div class="form-group">
+			                                        <label for="email" class="control-label col-lg-2 col-sm-2">新密码</label>
+			                                        <div class="col-lg-10 col-sm-10">
+			                                            <input class="form-control" placeholder="请输入新密码" name="password" type="password" id="password">
+			                                        </div>
+			                                    </div>
+												<div class="form-group">
+			                                        <label for="email" class="control-label col-lg-2 col-sm-2">再次确认</label>
+			                                        <div class="col-lg-10 col-sm-10">
+			                                            <input class="form-control" placeholder="请再次输入新密码" name="confirm_password" type="password" >
+			                                        </div>
+			                                    </div>
+			                                    <div class="form-group">
+			                                        <div class="col-lg-offset-2 col-lg-10">
+			                                            <button class="btn btn-success" type="submit" ><i class="fa fa-save"></i> 修改</button>
+			                                        </div>
+			                                    </div>
+			                                </form>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        {include file="../application/admin/common/footer.html" /}
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__ADMIN__/js/jquery-1.10.2.min.js"></script>
+<script src="__ADMIN__/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="__ADMIN__/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="__ADMIN__/js/bootstrap.min.js"></script>
+<script src="__ADMIN__/js/modernizr.min.js"></script>
+<script src="__ADMIN__/js/jquery.nicescroll.js"></script>
+
+<script type="text/javascript" src="__ADMIN__/js/jquery.validate.min.js"></script>
+<script type="text/javascript">
+	var Script = function () {
+    $.validator.setDefaults({
+        submitHandler: function() { 
+            ajaxRequest('{:url(\'pwd\')}','pwdForm');
+        }
+    });
+
+    $().ready(function() {
+        // validate signup form on keyup and submit
+        $("#pwdForm").validate({
+            rules: {
+                oldpwd: {required: true},
+                password: {required: true},
+			    confirm_password: {required: true,equalTo: "#password"}
+            },
+            messages: {
+                oldpwd: {required: "请输入原始密码"},
+                password: {required: "请输入新密码"},
+                confirm_password: {required: "请再次输入新密码",equalTo: "两次密码输入不一致"}
+            }
+        });
+    });
+
+
+}();
+function showPreview(source) {
+    var file = source.files[0];
+    if(window.FileReader) {
+        var fr = new FileReader();
+        fr.onloadend = function(e) {
+        	$("#adminAvatar").attr('src',e.target.result);
+        };
+        fr.readAsDataURL(file);
+        save();
+    }
+}
+// ajax提交包含图片的数据
+function save() {
+    var url = $('#avatarForm').attr('action');   
+    var form = document.getElementById('avatarForm');   
+    var file_obj = document.getElementById('avatar').files[0];
+    var formData =new FormData(form);  
+    formData.append("avatar", file_obj); 
+    $.ajax({
+        url : url,  
+        type : 'POST',  
+        data : formData,  
+        processData: false,  // 告诉jQuery不要去处理发送的数据  
+        contentType: false,  // 告诉jQuery不要去设置Content-Type请求头  
+        dataType:'json',          
+        success:function(info){  
+            if(info.code === 1){
+                // 提交成功
+                $("#adminAvatar").attr('src','/uploads/'+info.data.avatar);
+                $("#smallAvatar1").attr('src','/uploads/'+info.data.avatar);
+                $("#smallAvatar2").attr('src','/uploads/'+info.data.avatar);
+                layer.msg(info.msg,{icon:6});
+            }else{
+                // 提交失败
+                layer.msg(info.msg,{icon:5});
+            }
+        } 
+    })
+}
+</script>
+<!--common scripts for all pages-->
+{include file="../application/admin/common/global-js.html" /}
+
+</body>
+</html>

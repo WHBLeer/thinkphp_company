@@ -1,0 +1,67 @@
+<div class="left-side sticky-left-side">
+    <!--logo and iconic logo start-->
+    <div class="logo">
+        <a href="/admin"><img src="__ADMIN__/images/logo.png" title="{$CONFIG.webtitle}" alt="{$CONFIG.webtitle}" style="max-height: 42px;"></a>
+    </div>
+
+    <div class="logo-icon text-center">
+        <a href="/admin"><img src="__ADMIN__/images/logo_icon.png" title="{$CONFIG.webtitle}" alt="{$CONFIG.webtitle}" style="max-height: 42px;"></a>
+    </div>
+    <!--logo and iconic logo end-->
+    <div class="left-side-inner">
+        <!--sidebar nav start-->
+        <ul class="side-menu nav nav-pills nav-stacked custom-nav" id="side-menu">
+            <!-- <li><a href="/admin"><i class="fa fa-home"></i> <span>仪表板</span></a></li> -->
+            <li class="menu-list"><a href="javascript:void(0);"><i class="fa fa-book"></i> <span>关于我们</span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="{:url('about/index')}"> 公司介绍</a></li>
+                    <li><a href="{:url('style/index')}"> 员工风采</a></li>
+                    <!-- <li><a href="{:url('style/index2')}"> 员工风采</a></li> -->
+                </ul>
+            </li>
+            <li class="menu-list"><a href="javascript:void(0);"><i class="fa fa-building"></i> <span>走进孵化器</span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="{:url('hatch/index')}"> 孵化器简介</a></li>
+                    <li><a href="{:url('office/index')}"> 办公环境</a></li>
+                    <li><a href="{:url('mechanism/index')}"> 服务机构</a></li>
+                </ul>
+            </li>
+            <li class="menu-list"><a href="javascript:void(0);"><i class="fa fa-bullhorn"></i> <span>创事记</span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="{:url('creation/index')}"> 创事记</a></li>
+                    <li><a href="{:url('news/index')}"> 新闻列表</a></li>
+                    <li><a href="{:url('cate/index')}"> 栏目列表</a></li>
+                </ul>
+            </li>
+
+            <li class="menu-list"><a href="javascript:void(0);"><i class="fa fa-users"></i> <span>入驻管理</span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="{:url('guide/index')}"> 入孵申请</a></li>
+                    <li><a href="{:url('entering/index')}"> 入孵指南</a></li>
+                    <li><a href="{:url('reservation/index')}"> 预约服务</a></li>
+                </ul>
+            </li>
+
+            <li class="menu-list"><a href="javascript:void(0);"><i class="fa fa-cube"></i> <span>我们的服务</span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="{:url('service/index')}"> 首页管理</a></li>
+                    <li><a href="{:url('service/project')}"> 服务列表</a></li>
+                </ul>
+            </li>
+            <li><a href="{:url('partner/index')}"><i class="fa fa-handshake-o"></i> <span>合作伙伴</span></a></li>
+            <li><a href="{:url('regulation/index')}"><i class="fa fa-balance-scale"></i> <span>政策法规</span></a></li>
+            <li><a href="{:url('admin/info')}"><i class="fa fa-user"></i> <span>账户中心</span></a></li>
+            <li><a href="{:url('conf/conf')}"><i class="fa fa-cogs"></i> <span>系统配置</span></a></li>
+            
+            <!-- <li class="menu-list"><a href="javascript:void(0);"><i class="fa fa-cogs"></i> <span>系统配置</span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="{:url('conf/index')}"> 管理配置</a></li>
+                    <li><a href="{:url('conf/add')}"> 新增配置</a></li>
+                    <li><a href="{:url('conf/conf')}"> 编辑配置</a></li>
+                </ul>
+            </li> -->
+            <li><a href="{:url('admin/logout')}"><i class="fa fa-sign-in"></i> <span>退出登录</span></a></li>
+        </ul>
+        <!--sidebar nav end-->
+    </div>
+</div>

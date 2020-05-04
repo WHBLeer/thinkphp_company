@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <title>首页</title>
+    <!-- loadstyle start -->
+    {include file="../application/index/common/layout_css.html" /} 
+    <!-- loadstyle end -->
+    <style type="text/css">
+      .office li a img, .news .news-img img {
+          display: block;
+          width: 100%;
+          height: 175px;
+          object-fit: cover;
+      }
+    </style>
+</head>
+<body>
+  <!-- header start -->
+  {include file="../application/index/common/header.html" /} 
+  <!-- header end -->
+
+  <!-- banner start -->
+  {include file="../application/index/common/banner.html" /} 
+  <!-- banner end -->
+
+  <div class="container">
+    <div class="clearfix title-box">
+      <div class="pull-left">
+        <h1 class="title"><?php echo explode("|",$site_conf['office'])[0];?></h1>
+        <div class="title-sm"><?php echo explode("|",$site_conf['office'])[1];?></div>
+      </div>
+      <div class="pull-right"><a role="button" class="tt-more" data-toggle="modal" data-target="#myModal"><span>预约入驻</span></a></div>
+    </div>
+    <ul class="list-one text-center clearfix office">
+      {volist name="offices" id="office"}
+        <li><a href="{:url('office/index')}" class="img-hide"><img src="__IMG__/{$office.album}" alt="{$office.title}" title="{$office.title}"><span class="txt-elise">{$office.title}</span></a></li>
+      {/volist}
+    </ul>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-box modal-box-lg">
+        <div class="modal-tt">预约服务<a role="button" data-dismiss="modal" aria-label="Close"></a></div>
+        <div class="modal-form">
+          <form action="{:url('reservation/add')}" enctype="multipart/form-data" method="post" id="configForm">
+            <input type="text" class="form-control" placeholder="请输入企业名称" name="companyname"/>
+            <input type="text" class="form-control" placeholder="请输入企业负责人姓名" name="legalperson" />
+            <input type="text" class="form-control" placeholder="请输入联系电话" name="legalphone" />
+            <select class="form-control" name="service">
+              {volist name="services" id="service"}
+                  <option value="{$service.id}">{$service.title}</option>
+              {/volist}
+            </select>
+            <textarea class="form-control form-control-lg" placeholder="请输入贵企业的其他服务要求" rows="5" name="indorsation"></textarea>
+            <div class="form-t-p text-center">请务必填写“入孵申请表”并提交，以确保预约成功</div>
+            <div class="text-center"><button type="button" class="btn btn-tj btn-tj-xs" onclick="ajaxRequest('{:url(\'reservation/add\')}','configForm');return false;" >提交</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal02" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-box">
+        <div class="modal-tt">预约服务<a role="button" data-dismiss="modal" aria-label="Close"></a></div>
+        <div class="text-center icon-cg"><img src="__INDEX__/images/icon-cg.png"><br>提交成功</div>
+        <div class="cg-ts text-center">
+          <p>工作人员将尽快联系您，请耐心等候</p>
+          <p>请务必填写“入孵申请表”并提交，以确保预约成功</p>
+        </div>
+        <div class="text-center"><button type="button" class="btn btn-tj btn-tj-lg" onclick="location.href='{:url(\'guide/index\')}'">去填写入孵申请表</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="searvice-box">
+    <div class="container">
+        <h1 class="title"><?php echo explode("|",$site_conf['service'])[0];?></h1>
+        <div class="title-sm"><?php echo explode("|",$site_conf['service'])[1];?></div>
+        <div class="row text-center">
+          {volist name="services" id="service"}
+          <div class="col-xs-2">
+            <a href="javascript:void" class="box-back">
+              <div class="box-back-tt">{$service.title}</div>
+              <div class="fw-icon01 {$service.icon}"></div>
+            </a>
+          </div>
+          {/volist}
+        </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="clearfix">
+      <div class="pull-left">
+        <h1 class="title">新闻动态</h1>
+      </div>
+      <div class="pull-right"><a href="{:url('news/index',array('cateid'=>2))}" class="tt-more tt-more-sm">查看更多</a></div>
+    </div>
+    <ul class="news-list clearfix news">
+      {volist name="newss" id="news"}
+        <li>
+          <div class="news-img img-hide"><a href="{:url('news/detail',array('id'=>$news['id']))}"><img src="__IMG__/{$news.thumb}"></a></div>
+          <div class="news-tt"><a href="{:url('news/detail',array('id'=>$news['id']))}">{$news.title}</a></div>
+          <div class="news-p">{$news.desc}</div>
+          <div class="news-bottom">{$news.create_time}<a href="{:url('news/detail',array('id'=>$news['id']))}">阅读详细</a></div>
+        </li>
+      {/volist}
+    </ul>
+  </div>
+  <div id="main">
+    <section class="section-first" data-vidbg-bg="mp4: __INDEX__/media/video.mp4, poster: __INDEX__/media/fallback.jpg" data-vidbg-options="loop: true, muted: true, overlay: false">
+      <div class="text">
+        <h1>{$aboutin.title}</h1>
+        <!-- <h3>体验创业、转变观念、创富人生</h3> -->
+        <p>{$aboutin.introduction} </p>
+        <a href="{:url('aboutus/index')}">查看更多</a> </div>
+    </section>
+  </div>
+  <div class="container">
+    <h1 class="title">合作伙伴</h1>
+    <div class="hb-swiper">
+      {volist name="partners" id="partner"}
+        <div>
+          <a href="{$partner.url}" target="_blank" title="{$partner.desc}"><img src="__IMG__/{$partner.pic}"></a>
+        </div>
+      {/volist}
+    </div>
+  </div>
+  <!-- footer start -->
+  {include file="../application/index/common/footer.html" /} 
+  <!-- footer end -->
+</body>
+<!-- loadjavascript start -->
+{include file="../application/index/common/layout_js.html" /} 
+<!-- loadjavascript end -->
+<script type="text/javascript">
+  // ajax提交正常表单
+        function ajaxRequest(url,formid) {
+            var data = $("#"+formid).serialize();
+            $.post(url,data,function(info){
+                console.log(info)
+                if(info.code === 1){
+                    // 提交成功
+                    $('#myModal').modal('hide');
+                    $('#myModal02').modal('show');
+                }else{
+                    // 提交失败
+                    alert(info.msg);
+                    // layer.msg(info.msg,{icon:5});
+                }
+            });
+        }
+</script>
+</html>

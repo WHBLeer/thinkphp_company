@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <title>新闻动态</title>
+    <!-- loadstyle start -->
+    {include file="../application/index/common/layout_css.html" /} 
+    <!-- loadstyle end -->
+</head>
+<body>
+  <!-- header start -->
+  {include file="../application/index/common/header.html" /} 
+  <!-- header end -->
+
+  <!-- banner start -->
+  {include file="../application/index/common/banner.html" /} 
+  <!-- banner end -->
+  <div class="hb-back">
+    <div class="container">
+      <div class="news-click nav-open">新闻资讯<span><i class="glyphicon glyphicon-menu-down"></i></span></div>
+      <div class="clearfix list-header title-header">
+        <ul class="pull-left clearfix list-tabs">
+          <span class="nav-open"><i class="glyphicon glyphicon-remove"></i></span>
+          {volist name="cateres" id="cate"}
+            <li {if condition="$cate['id'] eq $cateid"}class="active"{/if}><a href="{:url('news/index',array('cateid'=>$cate['id']))}">{$cate.catename}</a></li>
+          {/volist}
+        </ul>
+        <div class="pull-right nav-b">当前位置：<a href="">首页</a> > <a href="">新闻动态</a> > <a href="">行业新闻</a></div>
+      </div>
+      <ul class="news-list news-list-ul clearfix">
+        {volist name="newsres" id="news"}
+        <li>
+          <div class="news-img img-hide"><a href="{:url('news/detail',array('id'=>$news['id']))}"><img src="__IMG__/{$news.thumb}"></a></div>
+          <div class="news-tt"><a href="{:url('news/detail',array('id'=>$news['id']))}">{$news.title}</a></div>
+          <div class="news-p">{$news.desc}</div>
+          <div class="news-bottom">{$news.create_time}<a href="{:url('news/detail',array('id'=>$news['id']))}">阅读详细</a></div>
+        </li>
+      {/volist}
+      </ul>
+      {$newsres->render()}
+    </div>
+  </div>
+  <!-- footer start -->
+  {include file="../application/index/common/footer.html" /} 
+  <!-- footer end -->
+</body>
+<!-- loadjavascript start -->
+{include file="../application/index/common/layout_js.html" /} 
+<!-- loadjavascript end -->
+
+</html>

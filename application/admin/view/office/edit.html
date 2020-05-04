@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="{$CONFIG.webdesc}">
+    <meta name="keyword" content="{$CONFIG.webkeyword}">
+
+    <title>编辑办公环境 | {$CONFIG.webtitle}</title>
+
+    {include file="../application/admin/common/global-css.html" /}
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    {include file="../application/admin/common/menu.html" /}
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        {include file="../application/admin/common/header.html" /}
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>办公环境 </h3>
+            <ul class="breadcrumb">
+                <li> <a href="/admin">首页</a> </li>
+                <li> <a href="javascript:void(0);">走进孵化器</a> </li>
+                <li class="active"> 编辑办公环境 </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <div class="form">
+                                <form action="{:url('edit')}" class="cmxform form-horizontal adminex-form" id="configForm" method="post" enctype="multipart/form-data" >
+                                    <input type="hidden" name="id" value="{$office.id}">
+                                    <div class="form-group">
+                                        <label for="name" class="control-label col-lg-1 col-sm-1">办公环境名称</label>
+                                        <div class="col-lg-11 col-sm-11">
+                                            <input class="form-control" placeholder="请填写办公环境名称" name="title" required="" type="text" value="{$office.title}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="album" class="control-label col-lg-1 col-sm-1">封面图<!--  --></label>
+                                        <div class="col-lg-5 col-sm-5">
+                                            <input type="file" name="album" class="form-control" id="logopic" onchange="showPreview(this)" multiple/>
+                                            <p>请上传办公环境照片</p>
+                                            <!-- <input type="hidden" id="oldalbum" value="{$office.album}"> -->
+                                        </div>
+                                        <div class="col-lg-5 col-sm-4" id="viewPic">
+                                            {if condition="empty($office['album']) neq true"}
+                                                <img src="__IMG__/{$office.album}" style="max-height: 80px">
+                                            {/if}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="content" required="" class="control-label col-lg-1 col-sm-1">办公环境介绍</label>
+                                        <div class="col-lg-11 col-sm-11">
+                                            <textarea class="form-control" rows="5" name="content"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-1 col-lg-11">
+                                            <button class="btn btn-success" type="submit"><i class="fa fa-save"></i> 保存</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        {include file="../application/admin/common/footer.html" /}
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__ADMIN__/js/jquery-1.10.2.min.js"></script>
+<script src="__ADMIN__/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="__ADMIN__/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="__ADMIN__/js/bootstrap.min.js"></script>
+<script src="__ADMIN__/js/modernizr.min.js"></script>
+<script src="__ADMIN__/js/jquery.nicescroll.js"></script>
+
+<script type="text/javascript" src="__ADMIN__/js/jquery.validate.min.js"></script>
+<!-- <script src="__ADMIN__/js/validation-init.js"></script> -->
+<script type="text/javascript" charset="utf-8" src="__ADMIN__/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ADMIN__/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__ADMIN__/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+var Script = function () {
+    $.validator.setDefaults({
+        submitHandler: function() { 
+            ajaxRequestImg1('{:url(\'edit\')}','configForm','logopic');
+        }
+    });
+
+    $().ready(function() {
+        var ue = UE.getEditor("news-content");
+        // validate signup form on keyup and submit
+        $("#configForm").validate({
+            rules: {
+                title: "required",
+                // album: "required",
+                content: "required"
+            },
+            messages: {
+                title: "请填写办公环境名称",
+                // album: "请上传办公环境照片",
+                content: "请写入办公环境介绍",
+            }
+        });
+    });
+
+
+}();
+function showPreview(source) {
+    var file = source.files[0];
+    if(window.FileReader) {
+        var fr = new FileReader();
+        var viewPic  = document.getElementById('viewPic');
+        fr.onloadend = function(e) {
+            viewPic.innerHTML = '';
+            viewPic.innerHTML = '<img src="'+e.target.result+'" style="max-height: 100px">';
+        };
+        fr.readAsDataURL(file);
+    }
+}
+// ajax提交包含图片的数据
+function ajaxRequestImg1(url,formid,imgid) {
+    var form = document.getElementById(formid);   
+    var file_obj = document.getElementById(imgid).files[0];
+    var formData =new FormData(form);  
+    if (typeof(exp) != "undefined"){
+        formData.append("album", file_obj); 
+    }
+    $.ajax({
+        url : url,  
+        type : 'POST',  
+        data : formData,  
+        processData: false,  // 告诉jQuery不要去处理发送的数据  
+        contentType: false,  // 告诉jQuery不要去设置Content-Type请求头  
+        dataType:'json',          
+        success:function(info){  
+            console.log(info)
+            if(info.code === 1){
+                // 提交成功
+                setTimeout(function () {location.href = info.url;}, 1000);
+                layer.msg(info.msg,{icon:6});
+            }else{
+                // 提交失败
+                layer.msg(info.msg,{icon:5});
+            }
+        } 
+    })
+}
+</script>
+<!--common scripts for all pages-->
+{include file="../application/admin/common/global-js.html" /}
+
+</body>
+</html>

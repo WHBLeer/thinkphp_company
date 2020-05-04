@@ -1,0 +1,109 @@
+
+<script type="text/javascript" src="__ADMIN__/js/scripts.js"></script>
+<script type="text/javascript" src="__COMMON__/layer/layer.js"></script>
+<script type="text/javascript">
+    $(window).on('load', function() {
+        $("#side-menu a").each(function(){
+            if($(this)[0].href===String(window.location)){
+                if ($(this).parent('li').parent('ul').prop('className').split(' ')[0]== 'sub-menu-list') {
+                    $(this).parent('li').parent('ul').parent('li').addClass("nav-active");
+                    $(this).parent('li').addClass("active");
+                }
+                if ($(this).parent('li').parent('ul').prop('className').split(' ')[0]== 'side-menu') {
+                    $(this).parent('li').addClass("active");
+                }
+            }  
+        });
+    });
+    //清除缓存
+    function ajaxClear(obj) {
+        var url=obj.getAttribute('data-GetUrl');
+        //询问框
+        layer.confirm('你确定要清除缓存吗？', {icon: 3, title:'提示'},
+        function(){
+            $.get(url,function(info){
+                if(info.code === 1){
+                    setTimeout(function () {location.href = info.url;}, 1000);
+                }
+                layer.msg(info.msg,{icon:1});
+            });
+        },
+        function(){});
+    }
+
+    // ajax提交正常表单
+    function ajaxRequest(url,formid) {
+        var data = $("#"+formid).serialize();
+        $.post(url,data,function(info){
+            console.log(info)
+            if(info.code === 1){
+                // 提交成功
+                setTimeout(function () {location.href = info.url;}, 1000);
+                layer.msg(info.msg,{icon:6});
+            }else{
+                // 提交失败
+                layer.msg(info.msg,{icon:5});
+            }
+        });
+    }
+
+    // ajax提交审核
+    function ajaxCheck(url) {
+        $.post(url,function(info){
+            console.log(info);
+            if(info.code === 1){
+                // 提交成功
+                setTimeout(function () {location.href = info.url;}, 1000);
+                layer.msg(info.msg,{icon:1});
+            }else{
+                // 提交失败
+                layer.msg(info.msg,{icon:2});
+            }
+        });
+    }
+
+    // ajax提交包含图片的数据
+    function ajaxRequestImg(url,formid,imgid) {
+        var form = document.getElementById(formid);   
+        var file_obj = document.getElementById(imgid).files[0];
+        var formData =new FormData(form);  
+        formData.append("pic", file_obj); 
+        $.ajax({
+            url : url,  
+            type : 'POST',  
+            data : formData,  
+            processData: false,  // 告诉jQuery不要去处理发送的数据  
+            contentType: false,  // 告诉jQuery不要去设置Content-Type请求头  
+            dataType:'json',          
+            success:function(info){  
+                console.log(info)
+                if(info.code === 1){
+                    // 提交成功
+                    setTimeout(function () {location.href = info.url;}, 1000);
+                    layer.msg(info.msg,{icon:6});
+                }else{
+                    // 提交失败
+                    layer.msg(info.msg,{icon:5});
+                }
+            } 
+        })
+    }
+    // ajax删除数据
+    function ajaxDelete(url) {
+        //询问框
+        layer.confirm('你确定要删除吗？', {icon: 3, title:'提示'},
+        function(){
+            $.get(url,function(info){
+                if(info.code === 1){
+                    // 提交成功
+                    setTimeout(function () {location.href = info.url;}, 1000);
+                    layer.msg(info.msg,{icon:1});
+                }else{
+                    // 提交失败
+                    layer.msg(info.msg,{icon:2});
+                }
+            });
+        },
+        function(){});
+    }
+</script>

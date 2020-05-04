@@ -1,0 +1,71 @@
+<div class="header clearfix">
+    <div class="pull-left logo">
+        <a href="/"><img src="__INDEX__/images/logo.png"></a>
+    </div>
+    <ul class="pull-right nav-list clearfix">
+        <li>
+            <a href="javascript:void(0);">关于我们</a>
+            <span>
+                <i class="glyphicon glyphicon-menu-down"></i>
+            </span>
+            <ul class="nav-down">
+                <li><a href="{:url('aboutus/index')}">公司介绍</a></li>
+                <li><a href="{:url('style/index')}">员工风采</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">走进孵化器</a>
+            <span>
+                <i class="glyphicon glyphicon-menu-down"></i>
+            </span>
+            <ul class="nav-down">
+                <li><a href="{:url('incubator/index')}">孵化器简介</a></li>
+                <li><a href="{:url('office/index')}">办公环境</a></li>
+                <li><a href="{:url('mechanism/index')}">服务机构</a></li>
+            </ul>
+        </li>
+        <li><a href="{:url('guide/index')}">预约入驻</a></li>
+        <li><a href="{:url('service/index')}">我们的服务</a></li>
+        <!-- <li>
+            <a href="javascript:void(0);">我们的服务</a>
+            <span>
+                <i class="glyphicon glyphicon-menu-down"></i>
+            </span>
+            <ul class="nav-down">
+                {volist name="services" id="service"}
+                <li><a href="{:url('service/index',array('sid'=>$service['id']))}">{$service.title}</a></li>
+                {/volist}
+            </ul>
+        </li> -->
+        <li><a href="{:url('entering/index')}">入孵指南</a></li>
+        <li><a href="{:url('partner/index')}">合作伙伴</a></li>
+        <li>
+            <a href="javascript:void(0);">创事记</a>
+            <span>
+                <i class="glyphicon glyphicon-menu-down"></i>
+            </span>
+            <ul class="nav-down">
+            	{volist name="cateres" id="cate"}
+                <li><a href="{:url('news/index',array('cateid'=>$cate['id']))}">{$cate.catename}</a></li>
+            	{/volist}
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">政策法规库</a>
+            <span>
+                <i class="glyphicon glyphicon-menu-down"></i>
+            </span>
+            <ul class="nav-down">
+                {volist name="items" id="item"}
+                <li><a href="{:url('regulation/index',array('type'=>$item['id']))}">{$item.cnname}</a></li>
+                {/volist}
+            </ul>
+        </li>
+
+    </ul>
+    <div class="menu-button pull-right">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+</div>
