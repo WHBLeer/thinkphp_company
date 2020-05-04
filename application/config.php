@@ -260,9 +260,9 @@ return [
         // 是否使用身份验证
         'SMTPAuth'  => true, 
         // 发送方的163邮箱用户名
-        'Username'  => 'whb199330@163.com', 
+        'Username'  => 'service@163.com', 
         // 客户端授权密码
-        'Password'  => 'whb199330', 
+        'Password'  => 'password', 
         // 使用ssl协议方式
         'SMTPSecure'=> 'ssl', 
         // 163邮箱的ssl协议方式端口号是465/994
